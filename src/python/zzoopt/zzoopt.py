@@ -42,7 +42,7 @@ class ZooptOptimizer(Optimizer):
         def wrapped_cost_function(params):
             params_x = params.get_x()
             value = cost_function(params_x)
-            history.append({'params': params_x, 'value': value})
+            history.append({'params': np.array(params_x), 'value': value})
             print(f'Function evaluation {len(history)}: {value}', flush=True)
             print(f'{params}', flush=True)
             return value
@@ -70,7 +70,7 @@ class ZooptOptimizer(Optimizer):
 
         optimization_results = {}
         optimization_results['opt_value'] = solution.get_value()
-        optimization_results['opt_params'] = solution.get_x()
+        optimization_results['opt_params'] = np.array(solution.get_x())
         optimization_results['history'] = history
         optimization_results['nfev'] = budget
 
